@@ -1,5 +1,5 @@
 {
-  "name": "@k8s-minikube-poc/service",
+  "name": "@k8s-minikube-poc/backend",
   "version": "1.0.0",
   "private": true,
   "description": "REST Api service to manage sample data",

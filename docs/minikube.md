@@ -64,6 +64,14 @@ Run this command to connect to the minikube docker daemon.
 eval $(minikube [--profile=PROFILE_NAME] docker-env)
 ```
 
+**Minikube IP**
+
+Discover the ip of the minikube VM.
+
+```bash
+minikube ip
+```
+
 ## Help
 
 Output of the command `minikube --help`

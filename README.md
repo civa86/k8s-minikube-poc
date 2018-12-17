@@ -10,9 +10,17 @@ Be sure to have installed and running softwares listed below:
 - [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Minikube](https://github.com/kubernetes/minikube)
 
+## Docker
+
+Read the [documentation](./docs/docker.md) to get started with docker commands
+
+## kubernetes
+
+Read the [documentation](./docs/kubernetes.md) to get started with kubernetes commands
+
 ## Minikube
 
-Read the [documentation](./docs/minikube.md) to get started with the minikube environment
+Read the [documentation](./docs/minikube.md) to get started with minikube commands
 
 ## Cluster
 
@@ -20,33 +28,47 @@ This project will run a little k8s cluster:
 
 | Type     | Technology         | Description                            |
 | -------- | ------------------ | -------------------------------------- |
-| service  | Express + Mongoose | REST Api service to manage sample data |
+| backend  | Express + Mongoose | REST Api service to manage sample data |
 | database | MongoDB            | NoSql persistence database             |
 | frontend | NGINX + VueJS      | Webserver with Single Page Application |
 
 Follow instructions in order to build and run the cluster in your local system
 
-#### Clone Repository
-
-Start with cloning the repository
-
 ```bash
-git clone ....
-```
+# FIRST TIME STEPS...
 
-#### Launch minikube and connect to cluster docker
+# Clone Repository
+$ git clone ....
 
-```bash
-minikube start
-eval $(minikube docker-env)
-```
+# Move into project directory
+$ cd k8s-minikube-poc
 
-#### Service
+# Build projects
+$ cd backend
+$ npm install
+$ cd ..
 
-Build the `REST Api Service` image
+# CLUSTER STEPS...
 
-```bash
-cd service
-npm install
-docker build -t ...
+# Start Minikube
+$ minikube start
+
+# Connect to cluster docker daemon
+$ eval $(minikube docker-env)
+
+
+
+
+
+# REST Api Service: docker image
+$ docker build -t k8s-minikube-poc-backend:v1 ./backend
+
+# MongoDB: docker image
+
+# Frontend: build
+
+# Frontend: docker image
+
+# Kubernetes run cluster
+kubectl create -f kubernetes/backend.yaml
 ```

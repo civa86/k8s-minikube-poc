@@ -1,0 +1,35 @@
+# Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: k8s-minikube-poc
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: k8s-minikube-poc-backend:v1
+          ports:
+            - containerPort: 3000
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    app: k8s-minikube-poc
+spec:
+  ports:
+    - name: backend
+      port: 3000
+      nodePort: 30001
+  selector:
+    app: backend
+  type: NodePort
