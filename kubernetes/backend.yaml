@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: backend
   labels:
-    app: k8s-minikube-poc
+    app: kmp
 spec:
   replicas: 2
   template:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: k8s-minikube-poc-backend:v1
+          image: kmp-backend:v1
           ports:
             - containerPort: 3000
 ---
@@ -24,12 +24,11 @@ kind: Service
 metadata:
   name: backend
   labels:
-    app: k8s-minikube-poc
+    app: kmp
 spec:
   ports:
     - name: backend
       port: 3000
-      nodePort: 30001
   selector:
     app: backend
   type: NodePort

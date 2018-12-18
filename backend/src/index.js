@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express'
 // const bodyParser = require('body-parser')
 
 // Init
@@ -13,7 +13,12 @@ app.use((request, response, next) => {
 })
 
 // Root API (ping)
-app.get('/', (request, response) => response.send({ message: 'k8s-minikube-poc REST Api Service' }))
+app.get('/', (request, response) => {
+  const a = { x: 1 }
+  const b = { ...a, y: 2 }
+  response.send({ b })
+  // { message: 'k8s-minikube-poc REST Api Service' }
+})
 
 // // API Router
 // app.use('/token', require('./routes/token'))
