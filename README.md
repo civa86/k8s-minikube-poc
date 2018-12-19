@@ -34,41 +34,53 @@ This project will run a little k8s cluster:
 
 Follow instructions in order to build and run the cluster in your local system
 
+#### Clone Repository
+
+> Step necessary only for the first installation.
+
 ```bash
-# FIRST TIME STEPS...
+git clone ....
+```
 
-# Clone Repository
-$ git clone ....
+#### Start Minikube
 
-# Move into project directory
-$ cd k8s-minikube-poc
-
-# Build projects
-$ cd backend
-$ npm install
-$ cd ..
-
-# CLUSTER STEPS...
-
+```bash
 # Start Minikube
-$ minikube start
+minikube start
 
 # Connect to cluster docker daemon
 $ eval $(minikube docker-env)
+```
 
+#### Build Microservices and Docker Images
 
+> Step necessary only for the first installation or whenever a microservice changes.
 
+```bash
+# backend
+cd <PATH_TO_K8S-MINIKUBE-POC>/backend
+npm run build
+docker build -t kmp-backend:v1 .
 
+# frontend
+cd <PATH_TO_K8S-MINIKUBE-POC>/frontend
+...
 
-# REST Api Service: docker image
-$ docker build -t k8s-minikube-poc-backend:v1 ./backend
+```
 
-# MongoDB: docker image
+#### Run the Cluster
 
-# Frontend: build
+```bash
+# Be sure to run kubernetes commands inside minikube
+$ eval $(minikube docker-env)
 
-# Frontend: docker image
-
-# Kubernetes run cluster
 kubectl create -f kubernetes/backend.yaml
 ```
+
+#### Discover Minikube ip address
+
+```bash
+minikube ip
+```
+
+Open browser and visit the Minikube address ([http://192.168.99.100](http://192.168.99.100)) //TODO: https??

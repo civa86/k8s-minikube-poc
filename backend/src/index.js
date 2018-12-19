@@ -12,23 +12,13 @@ app.use((request, response, next) => {
   next()
 })
 
-// Root API (ping)
-app.get('/', (request, response) => {
-  const a = { x: 1 }
-  const b = { ...a, y: 2 }
-  response.send({ b })
-  // { message: 'k8s-minikube-poc REST Api Service' }
-})
+// Root API
+app.get('/', (request, response) => response.send({ message: 'k8s-minikube-poc REST Api Service' }))
 
 // // API Router
 // app.use('/token', require('./routes/token'))
 // app.use('/score', require('./routes/score'))
 
-// Start Listening
+// Listening
 const port = 3000
-
-app.listen(port, () => {
-  //TODO: test logger
-  //   winston.info('Express: 3000')
-  console.log('[REST API] Listening on port:', port)
-})
+app.listen(port, () => console.log('[REST API] Listening on port:', port))
