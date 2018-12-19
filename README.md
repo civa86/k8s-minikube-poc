@@ -2,25 +2,14 @@
 
 Proof of Concept of a Kubernets cluster based on Minikube VM.
 
-## System Setup
-
 Be sure to have installed and running softwares listed below:
 
 - [Docker](https://www.docker.com/)
+  - [Get Started](./docs/docker.md) with docker commands
 - [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+  - [Get Started](./docs/kubernetes.md) with kubernetes commands
 - [Minikube](https://github.com/kubernetes/minikube)
-
-## Docker
-
-Read the [documentation](./docs/docker.md) to get started with docker commands
-
-## kubernetes
-
-Read the [documentation](./docs/kubernetes.md) to get started with kubernetes commands
-
-## Minikube
-
-Read the [documentation](./docs/minikube.md) to get started with minikube commands
+  - [Get Started](./docs/minikube.md) with minikube commands
 
 ## Cluster
 
@@ -28,9 +17,9 @@ This project will run a little k8s cluster:
 
 | Type     | Technology         | Description                            |
 | -------- | ------------------ | -------------------------------------- |
+| frontend | NGINX + VueJS      | Webserver with Single Page Application |
 | backend  | Express + Mongoose | REST Api service to manage sample data |
 | database | MongoDB            | NoSql persistence database             |
-| frontend | NGINX + VueJS      | Webserver with Single Page Application |
 
 Follow instructions in order to build and run the cluster in your local system
 
@@ -68,7 +57,7 @@ cd <PATH_TO_K8S-MINIKUBE-POC>/frontend
 
 ```
 
-#### Run the Cluster
+#### Create the Cluster
 
 ```bash
 # Be sure to run kubernetes commands inside minikube
@@ -83,4 +72,33 @@ kubectl create -f kubernetes/backend.yaml
 minikube ip
 ```
 
-Open browser and visit the Minikube address ([http://192.168.99.100](http://192.168.99.100)) //TODO: https??
+Open browser and visit the Minikube ip address ([http://192.168.99.100](http://192.168.99.100)) //TODO: https??
+
+#### Destroy Cluster
+
+Use label selector in order to identify all deployments and services of this project.
+
+```bash
+kubectl delete deployment,service -l app=kmp
+kubectl delete pods --all
+```
+
+> `app: kmp` is the common metadata -> label of each kubernetes elements in this project
+
+## Development
+
+In order to start microservices in development run npm scripts
+
+##### frontend
+
+```bash
+cd frontend
+npm run serve
+```
+
+##### backend
+
+```bash
+cd backend
+npm run serve
+```

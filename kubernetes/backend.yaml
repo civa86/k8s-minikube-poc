@@ -27,8 +27,9 @@ metadata:
     app: kmp
 spec:
   ports:
-    - name: backend
+    - name: api
+      protocol: TCP
       port: 3000
   selector:
     app: backend
-  type: NodePort
+  type: ClusterIP
