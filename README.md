@@ -32,7 +32,7 @@ TODO....
 
 ```bash
 # Clone repository
-git clone ....
+git clone https://github.com/civa86/k8s-minikube-poc.git
 
 # Check minikube version >= v0.14.0
 minikube version
