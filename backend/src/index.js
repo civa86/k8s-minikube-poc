@@ -1,24 +1,39 @@
 import express from 'express'
-// const bodyParser = require('body-parser')
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
 
-// Init
-const app = express()
+import config from './config'
+import todo from './routes/todo'
+import Todo from './models/Todo'
 
-// Middlewares
+// Database
+mongoose.connect(config.DB_URL)
+const db = mongoose.connection
 
-// app.use(bodyParser.json())
-app.use((request, response, next) => {
-  response.setHeader('Content-Type', 'application/json')
-  next()
+db.on('error', () => {
+  console.error('Database Connection Error')
+  process.exit(1)
 })
+db.once('open', () => {
+  // DB Models
+  mongoose.model('Todo', Todo)
 
-// Root API
-app.get('/', (request, response) => response.send({ message: 'k8s-minikube-poc REST Api Service' }))
+  // Init
+  const app = express()
 
-// // API Router
-// app.use('/token', require('./routes/token'))
-// app.use('/score', require('./routes/score'))
+  // Middlewares
+  app.use(bodyParser.json())
+  app.use((request, response, next) => {
+    response.setHeader('Content-Type', 'application/json')
+    next()
+  })
 
-// Listening
-const port = 3000
-app.listen(port, () => console.log('[REST API] Listening on port:', port))
+  // Root API
+  app.get('/', (request, response) => response.send({ message: 'k8s-minikube-poc REST Api Service' }))
+  // API Routes
+  app.use('/todo', todo)
+
+  // Listener
+  const port = 3000
+  app.listen(port, () => console.log('[REST API] Listening on port:', port))
+})

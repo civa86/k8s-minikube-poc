@@ -15,20 +15,33 @@ Be sure to have installed and running softwares listed below:
 
 This project will run a little k8s cluster:
 
-| Type     | Technology         | Description                            |
-| -------- | ------------------ | -------------------------------------- |
-| frontend | NGINX + VueJS      | Webserver with Single Page Application |
-| backend  | Express + Mongoose | REST Api service to manage sample data |
-| database | MongoDB            | NoSql persistence database             |
+| Type     | Technology         | Description                                     |
+| -------- | ------------------ | ----------------------------------------------- |
+| ingress  | NGINX              | Entrypoint Dispatcher and SSL termination proxy |
+| frontend | NGINX + VueJS      | Webserver with Single Page Application          |
+| backend  | Express + Mongoose | REST Api service to manage sample data          |
+| database | MongoDB            | NoSql persistence database                      |
 
-Follow instructions in order to build and run the cluster in your local system
+#### Architecture
 
-#### Clone Repository
+TODO....
+
+#### Setup Environment
 
 > Step necessary only for the first installation.
 
 ```bash
+# Clone repository
 git clone ....
+
+# Check minikube version >= v0.14.0
+minikube version
+
+# Enable Ingress Addon
+minikube addons enable ingress
+
+# Check Addons list
+minikube addons list
 ```
 
 #### Start Minikube
@@ -41,20 +54,18 @@ minikube start
 $ eval $(minikube docker-env)
 ```
 
-#### Build Microservices and Docker Images
+#### Build Docker Images
 
 > Step necessary only for the first installation or whenever a microservice changes.
 
+> Be sure to be connected to the minikube docker daemon.
+
 ```bash
 # backend
-cd <PATH_TO_K8S-MINIKUBE-POC>/backend
-npm run build
-docker build -t kmp-backend:v1 .
+docker build -t kmp-backend:v1 ./backend
 
 # frontend
-cd <PATH_TO_K8S-MINIKUBE-POC>/frontend
-...
-
+docker build -t kmp-frontend:v1 ./frontend
 ```
 
 #### Create the Cluster
@@ -72,33 +83,28 @@ kubectl create -f kubernetes/backend.yaml
 minikube ip
 ```
 
-Open browser and visit the Minikube ip address ([http://192.168.99.100](http://192.168.99.100)) //TODO: https??
-
-#### Destroy Cluster
-
-Use label selector in order to identify all deployments and services of this project.
-
-```bash
-kubectl delete deployment,service -l app=kmp
-kubectl delete pods --all
-```
-
-> `app: kmp` is the common metadata -> label of each kubernetes elements in this project
+Open browser and visit the Minikube ip address ([https://192.168.99.100](https://192.168.99.100))
 
 ## Development
 
 In order to start microservices in development run npm scripts
 
-##### frontend
+##### database
 
 ```bash
-cd frontend
-npm run serve
+docker run -d -p 27017:27017 mongo
 ```
 
 ##### backend
 
 ```bash
 cd backend
+npm run serve
+```
+
+##### frontend
+
+```bash
+cd frontend
 npm run serve
 ```
