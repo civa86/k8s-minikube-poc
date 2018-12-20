@@ -1,6 +1,6 @@
 # [P.O.C.] Kubernetes - Minikube
 
-Proof of Concept of a Kubernets cluster based on Minikube VM.
+Proof of Concept of a Kubernets cluster that runs inside Minikube.
 
 Be sure to have installed and running softwares listed below:
 
