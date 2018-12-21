@@ -15,6 +15,9 @@ spec:
       containers:
         - name: backend
           image: kmp-backend:v1
+          env:
+            - name: DB_URL
+              value: database
           ports:
             - containerPort: 3000
 ---

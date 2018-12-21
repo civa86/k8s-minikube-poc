@@ -68,22 +68,32 @@ docker build -t kmp-backend:v1 ./backend
 docker build -t kmp-frontend:v1 ./frontend
 ```
 
-#### Create the Cluster
+#### Launch the Cluster
 
 ```bash
 # Be sure to run kubernetes commands inside minikube
 $ eval $(minikube docker-env)
 
+# Create Persisten Volumes
+kubectl create -f kubernetes/volumes.yaml
+
+# Run database
+kubectl create -f kubernetes/database.yaml
+
+# Run backend
 kubectl create -f kubernetes/backend.yaml
-```
 
-#### Discover Minikube ip address
+# Run frontend
+kubectl create -f kubernetes/frontend.yaml
 
-```bash
+# Run Ingress
+kubectl create -f kubernetes/ingress.yaml
+
+# Discover minikube ip address
 minikube ip
 ```
 
-Open browser and visit the Minikube ip address ([https://192.168.99.100](https://192.168.99.100))
+Open a browser and visit: https://<minikube_ip>
 
 ## Development
 

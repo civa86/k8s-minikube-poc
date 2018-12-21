@@ -1,0 +1,41 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    app: kmp
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: database
+          image: mongo:4.0.4
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: db-persistent-storage
+              mountPath: /data/db
+      volumes:
+        - name: db-persistent-storage
+          persistentVolumeClaim:
+            claimName: db-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+  labels:
+    app: kmp
+spec:
+  ports:
+    - name: database
+      protocol: TCP
+      port: 27017
+  selector:
+    app: database
+  type: ClusterIP
