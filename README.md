@@ -24,7 +24,7 @@ This project will run a little k8s cluster:
 
 #### Architecture
 
-TODO....
+![architecture](docs/architecture.png 'Architecture Scheme')
 
 #### Setup Environment
 
