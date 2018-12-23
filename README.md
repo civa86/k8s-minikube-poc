@@ -15,12 +15,12 @@ Be sure to have installed and running softwares listed below:
 
 This project will run a little k8s cluster:
 
-| Type     | Technology         | Description                                     |
-| -------- | ------------------ | ----------------------------------------------- |
-| ingress  | NGINX              | Entrypoint Dispatcher and SSL termination proxy |
-| frontend | NGINX + VueJS      | Webserver with Single Page Application          |
-| backend  | Express + Mongoose | REST Api service to manage sample data          |
-| database | MongoDB            | NoSql persistence database                      |
+| Type     | Technology | Description                                     |
+| -------- | ---------- | ----------------------------------------------- |
+| ingress  | NGINX      | Entrypoint Dispatcher and SSL termination proxy |
+| frontend | VueJS      | Webserver with Single Page Application          |
+| backend  | NodeJS     | REST Api service to manage sample data          |
+| database | MongoDB    | NoSql persistence database                      |
 
 #### Architecture
 

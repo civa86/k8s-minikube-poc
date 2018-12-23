@@ -6,7 +6,9 @@ const router = express.Router()
 router.get('/', async (request, response) => {
   const Todo = mongoose.model('Todo')
   try {
-    const todos = await Todo.find().exec()
+    const todos = await Todo.find()
+      .sort({ createdAt: -1 })
+      .exec()
     response.send(todos)
   } catch (error) {
     response.status(500).send({ error })

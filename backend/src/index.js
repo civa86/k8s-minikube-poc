@@ -7,7 +7,10 @@ import todo from './routes/todo'
 import Todo from './models/Todo'
 
 // Database
-mongoose.connect(config.DB_URL)
+mongoose.connect(
+  config.DB_URL,
+  { useNewUrlParser: true }
+)
 const db = mongoose.connection
 
 db.on('error', () => {
