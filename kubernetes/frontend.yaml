@@ -15,7 +15,6 @@ spec:
       containers:
         - name: frontend
           image: kmp-frontend:v1.0.0
-          value: database
           ports:
             - containerPort: 80
 ---
