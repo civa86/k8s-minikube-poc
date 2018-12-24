@@ -62,10 +62,10 @@ $ eval $(minikube docker-env)
 
 ```bash
 # backend
-docker build -t kmp-backend:v1 ./backend
+docker build -t kmp-backend:v1.0.0 ./backend
 
 # frontend
-docker build -t kmp-frontend:v1 ./frontend
+docker build -t kmp-frontend:v1.0.0 ./frontend
 ```
 
 #### Launch the Cluster

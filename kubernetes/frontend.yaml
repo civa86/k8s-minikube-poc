@@ -2,7 +2,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: backend
+  name: frontend
   labels:
     app: kmp
 spec:
@@ -10,29 +10,27 @@ spec:
   template:
     metadata:
       labels:
-        app: backend
+        app: frontend
     spec:
       containers:
-        - name: backend
-          image: kmp-backend:v1.0.0
-          env:
-            - name: DB_URL
-              value: database
+        - name: frontend
+          image: kmp-frontend:v1.0.0
+          value: database
           ports:
-            - containerPort: 3000
+            - containerPort: 80
 ---
 # Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: frontend
   labels:
     app: kmp
 spec:
   ports:
-    - name: api
+    - name: spa
       protocol: TCP
-      port: 3000
+      port: 80
   selector:
-    app: backend
+    app: frontend
   type: ClusterIP
