@@ -10,7 +10,6 @@
 
 <style scoped lang="scss">
 #error {
-  color: rgb(202, 60, 60);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -26,6 +25,7 @@
   justify-content: center;
 
   h1 {
+    color: rgb(202, 60, 60);
     margin: 0;
     font-size: 28px;
     span {

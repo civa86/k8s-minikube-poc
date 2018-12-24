@@ -27,10 +27,11 @@ router.post('/', async (request, response) => {
   }
 })
 
-router.put('/done/:id', async (request, response) => {
+router.put('/:id', async (request, response) => {
   const Todo = mongoose.model('Todo')
   try {
-    const element = await Todo.findOneAndUpdate({ _id: request.params.id }, { done: true }, { new: true })
+    const done = request.body.done || false
+    const element = await Todo.findOneAndUpdate({ _id: request.params.id }, { done }, { new: true })
     response.send(element)
   } catch (error) {
     response.status(500).send({ error })

@@ -5,9 +5,8 @@
   "description": "REST Api service to manage sample data",
   "main": "src/index.js",
   "scripts": {
-    "clean": "rm -rf ./build",
-    "serve": "npm run clean && webpack --config webpack.config.dev.js --colors",
-    "build": "npm run clean && npm i && webpack --config webpack.config.prod.js --colors"
+    "serve": "webpack --config webpack.config.dev.js --colors",
+    "build": "npm i && webpack --config webpack.config.prod.js --colors"
   },
   "author": "Dario Civallero <dario.civallero@gmail.com>",
   "license": "ISC",

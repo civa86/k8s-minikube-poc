@@ -8,13 +8,16 @@ export default new Vuex.Store({
   state: {
     isFetching: false,
     error: null,
+    showCompleted: true,
     items: []
   },
   getters: {
     isFetching: state => state.isFetching,
     hasError: state => state.error !== null,
-    todos: state => state.items.filter(x => !x.done),
-    doneTodos: state => state.items.filter(x => x.done)
+    showCompleted: state => state.showCompleted,
+    todos: state => (state.showCompleted ? state.items : state.items.filter(x => !x.done)),
+    doneCnt: state => state.items.filter(x => x.done).length,
+    itemsCnt: state => state.items.length
   },
   mutations: {
     TODO_IS_FETCHING(state, value) {
@@ -29,6 +32,9 @@ export default new Vuex.Store({
       state.isFetching = false
       state.error = null
       state.items = [...data]
+    },
+    TODO_SET_SHOW_COMPLETED(state, value) {
+      state.showCompleted = value
     }
   },
   actions: {
@@ -57,6 +63,31 @@ export default new Vuex.Store({
             resolve()
           })
       })
+    },
+    TODO_UPDATE({ dispatch, commit }, params) {
+      commit('TODO_IS_FETCHING', true)
+      axios
+        .put('/api/todo/' + params.id, { done: params.done })
+        .then(() => {
+          dispatch('TODO_GET_LIST')
+        })
+        .catch(() => {
+          commit('TODO_ERROR')
+        })
+    },
+    TODO_DELETE({ dispatch, commit }, id) {
+      commit('TODO_IS_FETCHING', true)
+      axios
+        .delete('/api/todo/' + id)
+        .then(() => {
+          dispatch('TODO_GET_LIST')
+        })
+        .catch(() => {
+          commit('TODO_ERROR')
+        })
+    },
+    TODO_SET_SHOW_COMPLETED({ commit }, value) {
+      commit('TODO_SET_SHOW_COMPLETED', value)
     }
   }
 })

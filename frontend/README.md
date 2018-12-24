@@ -1,4 +1,4 @@
-# frontend
+# tedt-vue
 
 ## Project setup
 ```
