@@ -4,12 +4,12 @@
   "private": true,
   "description": "REST Api service to manage sample data",
   "main": "src/index.js",
+  "author": "Dario Civallero <dario.civallero@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "serve": "webpack --config webpack.config.dev.js --colors",
     "build": "npm i && webpack --config webpack.config.prod.js --colors"
   },
-  "author": "Dario Civallero <dario.civallero@gmail.com>",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.3",
     "express": "4.16.4",

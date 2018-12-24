@@ -1,7 +1,10 @@
 {
-  "name": "tedt-vue",
-  "version": "0.1.0",
+  "name": "@k8s-minikube-poc/frontend",
+  "version": "1.0.0",
   "private": true,
+  "description": "Single page application that consumes REST Api",
+  "author": "Dario Civallero <dario.civallero@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
